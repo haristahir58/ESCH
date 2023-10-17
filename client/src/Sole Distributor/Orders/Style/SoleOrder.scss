@@ -1,0 +1,91 @@
+/* Add these styles in your SCSS file */
+
+.order-list {
+  display: flex;
+  // flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.order-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-id,
+.order-email,
+.order-address {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.order-items {
+  margin-top: 10px;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.product-title {
+  font-weight: bold;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.status.accepted {
+  background-color: lightgreen;
+  color: white;
+}
+
+.status.rejected {
+  background-color: lightcoral;
+  color: white;
+}
+
+.status.pending {
+  background-color: rgb(183, 152, 59);
+  color: white;
+}
+
+.order-action {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.Button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  margin: 5px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
