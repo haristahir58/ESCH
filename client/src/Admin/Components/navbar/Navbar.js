@@ -85,20 +85,7 @@ const Navbar = () => {
           <div className="item">
           <DarkModeOutlinedIcon className='icon' onClick={()=>dispatch({type:"TOGGLE"})}/>
           </div>
-          <div className="item">
-          <FullscreenExitOutlinedIcon className='icon'/>
-          </div>
-          <div className="item">
-          <NotificationsNoneOutlinedIcon className='icon'/>
-          <div className="counter">1</div>
-          </div>
-          <div className="item">
-          <ChatBubbleOutlineOutlinedIcon className='icon'/>
-          <div className="counter">2</div>
-          </div>
-          <div className="item">
-          <ListOutlinedIcon className='icon'/>
-          </div>
+          
           <div className="item">
           <img src="https://zoomstudio.com.au/wp-content/uploads/jonathan-Simpson-5.jpg.webp" alt="" className='avatar'/>
           </div>

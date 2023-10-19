@@ -6,6 +6,7 @@ import { useContext } from 'react';
 
 const DisSidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const [lowStockCount, setLowStockCount] = useState(0);
   const [userData, setUserData] = useState(null);
 
   const callHomePage = async () => {
@@ -32,9 +33,20 @@ const DisSidebar = () => {
       // navigate("/user/login");
     }
   };
+  const fetchLowStockCount = async () => {
+    try {
+      const response = await fetch('/distributor/low-stock');
+      const lowStockItems = await response.json();
+      return lowStockItems.length;
+    } catch (error) {
+      console.error('Error fetching low stock items:', error);
+      return 0;
+    }
+  };
 
   useEffect(() => {
     callHomePage();
+    fetchLowStockCount().then((count) => setLowStockCount(count));
   }, []);
 
   return (
@@ -76,6 +88,13 @@ const DisSidebar = () => {
             </li>
           </Link>
 
+          <Link to="/distributor/my-products" style={{ textDecoration: 'none' }}>
+            <li>
+            <i className="fa fa-shopping-bag icon1"></i>
+              <span>Inventory</span>
+            </li>
+          </Link>
+
             <li>
             <i className="fa fa-shopping-bag icon1"></i>
               <span>Sales Team</span>
@@ -88,20 +107,26 @@ const DisSidebar = () => {
             <span>Report</span>
           </li>
 
-          <li>
+          <Link to={"/distributor/inventory"} style={{ textDecoration: 'none' }}>
+            <li>
             <i className="fa fa-bell icon1"></i>
             <span>Notifications</span>
-          </li>
+            {lowStockCount > 0 && <div className="notification-badge">{lowStockCount}</div>}
+            </li>
+          </Link>
+{/* 
           <p className="titleDis">SERVICE</p>
           <li>
             <i className="fa fa-truck icon1"></i>
             <span>Orders</span>
-          </li>
+          </li> */}
 
-          <li>
+          <Link to={'/distributor/complains'}>
+            <li>
             <i className="fa fa-shopping-cart icon1"></i>
             <span>View Complains</span>
-          </li>
+            </li>
+          </Link>
 
           <p className="titleDis">USER</p>
 

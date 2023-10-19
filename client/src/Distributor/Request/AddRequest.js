@@ -6,7 +6,7 @@ import Navbar from "../Components/navbar/Navbar";
 const AddRequest = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const [experience, setExperience] = useState({}); // Initialize as an empty object
+  const [experience, setExperience] = useState(''); // Initialize as an empty object
   const params = useParams();
 
   const callHomePage = async () => {
@@ -38,12 +38,8 @@ const AddRequest = () => {
   }, []); // Add callHomePage as a dependency
 
   const handleInputs = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      [name]: value,
-    }));
+    const { name, value } = e.target;
+    setExperience(value);
   };
   
   const PostData = async (e) => {
@@ -159,7 +155,7 @@ const AddRequest = () => {
     name="experience"
     id="experience"
     autoComplete="off"
-    value={experience.experience} // Ensure you access the 'experience' property
+    value={experience} // Ensure you access the 'experience' property
     onChange={handleInputs}
   />
 </div>
@@ -171,6 +167,7 @@ const AddRequest = () => {
                 id="send"
                 value={"Send Request"}
                 className="button"
+                onClick={PostData}
               />
             </form>
           </div>

@@ -90,9 +90,9 @@ export default function Navbar() {
         <a href="single.html" className="dropdown-item">
           As Sales team Member
         </a>
-        <a href="single.html" className="dropdown-item">
+        <NavLink to={"/shopkeeper/login"} className="dropdown-item">
           As Shopkeeper
-        </a>
+        </NavLink>
       </div>
     </div>
 
@@ -121,9 +121,9 @@ export default function Navbar() {
         <a href="single.html" className="dropdown-item">
           As Sales team Member
         </a>
-        <a href="single.html" className="dropdown-item">
+        <NavLink to={"/shopkeeper/register"} className="dropdown-item">
           As Shopkeeper
-        </a>
+        </NavLink>
       </div>
     </div>
 

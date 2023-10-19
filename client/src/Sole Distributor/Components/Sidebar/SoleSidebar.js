@@ -19,10 +19,12 @@ import { useContext } from 'react';
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const [lowStockCount, setLowStockCount] = useState(0);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     // Fetch and update the low stock count when the component mounts
     fetchLowStockCount().then((count) => setLowStockCount(count));
+    callHomePage();
   }, []);
 
   const fetchLowStockCount = async () => {
@@ -35,6 +37,35 @@ const Sidebar = () => {
       return 0;
     }
   };
+
+  const callHomePage = async () => {
+    try {
+      const res = await fetch("/soleDistributor/profile", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setUserData(data);
+
+      if (!res.ok) {
+        const error = new Error(res.statusText);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      // navigate("/user/login");
+    }
+  };
+
+
+    callHomePage();
+
 
   return (
     <div className="sidebar">
@@ -105,11 +136,14 @@ const Sidebar = () => {
             </li>
           </Link>
 
+          <Link to="/soleDistributor/sell-products" style={{ textDecoration: 'none' }}>
+            <li>
+              <LocalMallIcon className="icon1" />
+              <span>Sell Products</span>
+            </li>
+          </Link>
+
           <p className="title">USEFUL</p>
-          <li>
-            <BarChartIcon className="icon1" />
-            <span>Stats</span>
-          </li>
 
           <Link to="/soleDistributor/inventory" style={{ textDecoration: 'none' }}>
           <li>
@@ -120,10 +154,12 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">USER</p>
+          <Link to={`/soleDistributor/profile/${userData && userData._id}`} style={{ textDecoration: 'none' }}>
           <li>
             <AccountCircleIcon className="icon1" />
             <span>Profile</span>
           </li>
+          </Link>
 
           <li>
             <Link to={'/soleDistributor/logout'} style={{ textDecoration: 'none' }}>

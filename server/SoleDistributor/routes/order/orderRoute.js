@@ -167,51 +167,6 @@ router.put('/admin/orders/:id', async (req, res) => {
     }
 });
 
-// Route to fetch products from the accepted order
-// router.get('/soleDistributor/my-products', authenticate, async (req, res) => {
-//     try {
-//         const userId = req.userId;
-
-//         // Find the accepted orders for the sole distributor
-//         const orders = await Order.find({
-//             userId: userId,
-//             status: 'accepted'
-//         }).populate('orderItems.product');
-
-//         // Extract product details from accepted orders
-//         const products = [];
-
-//         orders.forEach((order) => {
-//             order.orderItems.forEach((orderItem) => {
-//                 const { product, quantity } = orderItem;
-//                 products.push({ product, quantity });
-//             });
-//         });
-
-//         // Map the product details to include product titles
-//         const productsWithTitles = [];
-
-//         for (const productInfo of products) {
-//             const product = await Product.findById(productInfo.product);
-
-//             if (product) {
-//                 productsWithTitles.push({
-//                     title: product.title,
-//                     quantity: productInfo.quantity,
-//                     description: product.description,
-//                     price: product.price,
-//                     category: product.category,
-//                     imageUrl: product.imageUrl,
-//                 });
-//             }
-//         }
-
-//         res.json(productsWithTitles);
-//     } catch (error) {
-//         console.error('Error fetching products:', error);
-//         res.status(500).json({ message: 'Error fetching products' });
-//     }
-// });
 
 
 // Route to fetch products from the accepted order
@@ -520,6 +475,9 @@ router.get('/admin/lastMonthEarnings', async (req, res) => {
     res.status(500).json({ message: 'Error fetching last month earnings' });
   }
 });
+
+
+
 
 
 

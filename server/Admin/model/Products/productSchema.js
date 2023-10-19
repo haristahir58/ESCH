@@ -27,7 +27,8 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 1, // Set the default value to 1
-      }
+      },
+      soleDistributor: { type: mongoose.Schema.Types.ObjectId, ref: 'Sole Distributors' },
 
 
 });

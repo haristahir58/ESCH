@@ -30,7 +30,7 @@ const Sidebar = () => {
         </div>
         <hr />
         <div className="center">
-            <ul>
+            <ul style={{lineHeight: "29px"}}>
                 <p className="title">MAIN</p>
                 <Link to="/admin" style={{textDecoration:"none"}}>
                 <li>
@@ -60,36 +60,8 @@ const Sidebar = () => {
                 </Link>
             
                 <p className="title">USEFUL</p>
-                <li>
-                <BarChartIcon className="icon" />
-                    <span>Stats</span>
-                </li>
 
-                <li>
-                <NotificationsIcon className="icon" /> 
-                    <span>Notifications</span>
-                </li>
-                <p className="title">SERVICE</p>
-                <li>
-                <SettingsEthernetIcon className="icon"/> 
-                    <span>System Health</span>
-                </li>
-
-                <li>
-                <AssignmentIcon className="icon"/>
-                    <span>Logs</span>
-                </li>
-
-                <li>
-                <SettingsIcon className="icon"/>
-                    <span>Settings</span>
-                </li>
-                <p className="title">USER</p>
-                <li>
-                <AccountCircleIcon className="icon"/>
-                    <span>Profile</span>
-                </li>
-                
+               
                 <li>
                 <Link to={"/admin/logout"}  style={{textDecoration:"none"}}>
                 <LogoutIcon className="icon"/>

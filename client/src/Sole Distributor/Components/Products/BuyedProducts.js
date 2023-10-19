@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../../../Sole Distributor/Components/navbar/Navbar';
 import Sidebar from '../../../Sole Distributor/Components/Sidebar/SoleSidebar';
 
@@ -44,14 +45,11 @@ const BuyedProducts = () => {
                 <div className="cardText">
                   {item.description}
                 </div>
-                <div className="cardText">
+                <div className="cardText" style={{fontSize: "16px",  fontWeight: "bold",  color: "red",   marginBottom: "10px"}}>
                   Quantity: {item.quantity}
                 </div>
-                
-                <div className="cardText1">
-                  Rs. {item.price}
-                </div>
 
+                
               </div>
             ))}
           </div>

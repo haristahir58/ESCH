@@ -48,6 +48,18 @@ import SoleOrders from './Sole Distributor/Orders/SoleOrders';
 import AdminOrder from './Admin/Components/Orders/AdminOrders';
 import BuyedProducts from './Sole Distributor/Components/Products/BuyedProducts';
 import Inventory from './Sole Distributor/Components/Inventory/Inventory';
+import SellProducts from './Sole Distributor/Components/Products/SellProducts';
+import MyProducts from './Distributor/Components/products/MyProducts';
+import ViewProducts from './Distributor/Components/products/ViewProducts';
+import ShopHome from './Shopkeeper/Components/ShopHome';
+import ShopCart from './Shopkeeper/Components/ShopCart';
+import DisInventory from './Distributor/Components/inventory/DisInventory';
+import ShopSignup from './Shopkeeper/Components/ShopSignup';
+import ShopLogin from './Shopkeeper/Components/ShopLogin';
+import AddComplain from './Shopkeeper/Components/AddComplain';
+import ViewComplains from './Shopkeeper/ViewComplains';
+import ShopkeeperLogout from './Shopkeeper/Components/ShopkeeperLogout';
+import ManageComplaints from './Distributor/Components/Complains/ManageComplain';
 
 
 
@@ -110,6 +122,7 @@ function App() {
        <Route exact path = {'/soleDistributor/orders'} element= {<SoleOrders/>}/>
        <Route exact path = {'/soleDistributor/my-products'} element= {<BuyedProducts/>}/>
        <Route exact path = {'/soleDistributor/inventory'} element= {<Inventory/>}/>
+       <Route exact path = {'/soleDistributor/sell-products'} element= {<SellProducts/>}/>
 
       {/*Distributor's Components Routes */}
 
@@ -121,6 +134,20 @@ function App() {
         <Route path="/distributor/request/new" element={<AddRequest />} />
         <Route path="/distributor/requests" element={<ViewRequest
         />} />
+        <Route path="/distributor/products" element={<ViewProducts/>} />
+        <Route path="/distributor/my-products" element={<MyProducts />} />
+        <Route path="/distributor/inventory" element={<DisInventory />} />
+        <Route path="/distributor/complains" element={<ManageComplaints />} />
+
+        {/*Shopkeeper's Components Routes */}
+        <Route exact path='/shopkeeper/register' element={<ShopSignup/>} />
+        <Route exact path='/shopkeeper/login' element={<ShopLogin/>} />
+        <Route exact path='/shopkeeper' element={<ShopHome/>} />
+        <Route exact path='/shopkeeper/complain' element={<AddComplain/>} />
+        <Route exact path='/shopkeeper/view-complain' element={<ViewComplains/>} />
+        <Route exact path='/shopkeeper/cart' element={<ShopCart/>} />
+        <Route exact path='/shopkeeper/logout' element={<ShopkeeperLogout/>} />
+
 
       
         </Routes>

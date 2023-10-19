@@ -156,10 +156,10 @@ export default function About() {
                       </div>
                       <div className="details">
                         <h4>Muhammad Haris Tahir</h4>
-                        <span className="position">Front-end Developer</span>
+                        <span className="position">MERN Developer</span>
                         <p>
-                          Muhammad Haris is a skilled front-end developer with
-                          expertise in React and MongoDB. He has a keen eye for
+                          Muhammad Haris is a skilled MERN developer with
+                          expertise in React, Express and MongoDB. He has a keen eye for
                           detail and a passion for creating intuitive and
                           user-friendly interfaces.
                         </p>
@@ -173,12 +173,12 @@ export default function About() {
                       </div>
                       <div className="details">
                         <h4>Muhammad Anis Sarwar</h4>
-                        <span className="position">Back-end Developer</span>
+                        <span className="position">Mobile Application Developer</span>
                         <p>
-                          Muhammad Anis Sarwar is a seasoned back-end developer
-                          with proficiency in Node.js and Express. He has
+                          Muhammad Anis Sarwar is a seasoned Mobile App developer
+                          with proficiency in React-Native and Firebase. He has
                           extensive experience in building scalable and secure
-                          APIs that power enterprise-level applications.
+                          Apps that power enterprise-level applications.
                         </p>
                       </div>
                     </div>
@@ -274,12 +274,12 @@ export default function About() {
                 <div className="team card position-relative overflow-hidden border-0 mb-5">
                   <img
                     className="card-img-top"
-                    src="assets/img/team-1.jpg"
+                    src="assets/haris.jpg"
                     alt=""
                   />
                   <div className="card-body text-center p-0">
                     <div className="team-text d-flex flex-column justify-content-center bg-secondary">
-                      <h5 className="font-weight-bold">John Smith</h5>
+                      <h5 className="font-weight-bold">Haris Tahir</h5>
                       <span>Sole Distributor</span>
                     </div>
                     <div className="team-social d-flex align-items-center justify-content-center bg-primary">
@@ -312,12 +312,12 @@ export default function About() {
                 <div className="team card position-relative overflow-hidden border-0 mb-5">
                   <img
                     className="card-img-top"
-                    src="assets/img/team-2.jpg"
+                    src="assets/anis.jpg"
                     alt=""
                   />
                   <div className="card-body text-center p-0">
                     <div className="team-text d-flex flex-column justify-content-center bg-secondary">
-                      <h5 className="font-weight-bold">Harry Victor</h5>
+                      <h5 className="font-weight-bold">Anis Sarwar</h5>
                       <span>Distributor</span>
                     </div>
                     <div className="team-social d-flex align-items-center justify-content-center bg-primary">
@@ -350,7 +350,7 @@ export default function About() {
                 <div className="team card position-relative overflow-hidden border-0 mb-5">
                   <img
                     className="card-img-top"
-                    src="assets/img/team-3.jpg"
+                    src="assets/img/team-1.jpg"
                     alt=""
                   />
                   <div className="card-body text-center p-0">

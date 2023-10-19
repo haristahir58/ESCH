@@ -37,6 +37,9 @@ app.use(require('./Distributor/routes/disLogin/disAuth'))
 app.use(require('./Distributor/routes/request/requestRoute'))
 app.use(require('./SoleDistributor/routes/requests/soleRequest'))
 app.use(require('./SoleDistributor/routes/order/orderRoute'))
+app.use(require('./SoleDistributor/routes/Sell/sellRoutes'))
+app.use(require('./Shopkeeper/routes/ShopLogin/shopRoutes'))
+app.use(require('./Shopkeeper/routes/complain/complainRoutes'))
 
 const PORT = process.env.PORT;
 

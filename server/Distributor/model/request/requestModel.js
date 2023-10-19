@@ -25,7 +25,7 @@ const requestSchema = new mongoose.Schema({
 
 });
 
-requestSchema.index({ userId: 1, date: 1 }, { unique: true }); 
+// requestSchema.index({ userId: 1, date: 1 }, { unique: true }); 
 
 const Request = mongoose.model('request', requestSchema);
 
