@@ -16,22 +16,15 @@ import {useNavigate} from "react-router-dom";
 
 
 
-const ProductList = () => {
+const AllCategories = () => {
 
   const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
     useEffect(()=>{
-        getProducts();
         fetchCategories();
     },[])
 
-    const getProducts = async () => {
-        let result = await fetch('/admin/products')
-        result = await result.json();
-        setProducts(result);
-    }
     
     const fetchCategories = async () => {
       try {
@@ -49,16 +42,16 @@ const ProductList = () => {
   
 
 
-    const deleteProduct = async (id) => {
-      let result = await fetch(`/admin/products/${id}`, {
+    const deleteCategory = async (id) => {
+      let result = await fetch(`/admin/categories/${id}`, {
         method: "Delete",
       });
     
       if (result.status === 200) {
-        alert("Product is Deleted");
+        alert("Category is Deleted");
         navigate("/admin");
       } else {
-        console.log("Error deleting Product");
+        console.log("Error deleting Category");
       }
     };
 
@@ -75,9 +68,9 @@ const ProductList = () => {
       <Navbar/>
 
       <div className="productTableTitle">
-            Products
-            <Link to="/admin/products/new" style={{textDecoration:"none"}} className="newLink">
-            Add New Products
+            Category
+            <Link to="/admin/categories/new" style={{textDecoration:"none"}} className="newLink">
+            Add New Category
             </Link>
           </div>
           <div className="tableContainer">
@@ -85,30 +78,20 @@ const ProductList = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className="tableCell">Product ID</TableCell>
-              <TableCell className="tableCell">Image</TableCell>
-              <TableCell className="tableCell">Title</TableCell>
-              <TableCell className="tableCell">Description</TableCell>
-              <TableCell className="tableCell">Category</TableCell>
-              <TableCell className="tableCell">Price</TableCell>
-              <TableCell className="tableCell">Quantity</TableCell>
-              <TableCell className="tableCell">Operations</TableCell>
+              <TableCell className="tableCell">Category ID</TableCell>
+              <TableCell className="tableCell">Category Name</TableCell>
+              <TableCell className="tableCell" style={{textAlign: "inherit"}}>Operations</TableCell>
             </TableRow>
           </TableHead>
 
           {
-         products.map((item, index) => (
+         categories.map((item, index) => (
             <TableBody>
             <TableRow key={item._id}>
-            <TableCell className="tableCell">{index+1}</TableCell>
-            <TableCell className="tableCell">{<img src={`http://localhost:4000/${item?.imageUrl}`} />}</TableCell>
-            <TableCell className="tableCell">{item.title}</TableCell>
-            <TableCell className="tableCell">{item.description}</TableCell>
-            <TableCell className="tableCell">{categories.find((cat) => cat._id === item.category)?.name}</TableCell>
-            <TableCell className="tableCell">{item.price} Rs</TableCell>
-            <TableCell className="tableCell">{item.quantity}</TableCell>
-            <TableCell className="tableCell"><div className="deleteButton" onClick={()=>deleteProduct(item._id)}>Delete</div>
-            <Link to={`/admin/products/${item._id}`} className="buttonLink">Update</Link></TableCell>
+            <TableCell className="tableCell">{index}</TableCell>
+            <TableCell className="tableCell">{item.name}</TableCell>
+            <TableCell className="tableCell"><div className="deleteButton" onClick={()=>deleteCategory(item._id)}>Delete</div>
+            <Link to={`/admin/category/${item._id}`} className="buttonLink">Update</Link></TableCell>
       </TableRow>
     </TableBody>
   ))
@@ -128,4 +111,4 @@ const ProductList = () => {
   )
 }
 
-export default ProductList
+export default AllCategories

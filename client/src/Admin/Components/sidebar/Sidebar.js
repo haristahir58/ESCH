@@ -45,6 +45,14 @@ const Sidebar = () => {
                     <span>Sole Distributors</span>
                 </li>
                 </Link>
+              
+                <Link to="/admin/categories" style={{textDecoration:"none"}}>
+                <li>
+                    <LocalMallIcon className="icon" />
+                    <span>Categories</span>
+                </li>
+               
+                </Link>
                 <Link to="/admin/products" style={{textDecoration:"none"}}>
                 <li>
                 <LocalMallIcon className="icon" />
@@ -55,7 +63,14 @@ const Sidebar = () => {
                 <Link to = "/admin/order" style={{textDecoration:"none"}}>
                 <li>
                 <ShoppingCartIcon className="icon" />
-                    <span>Orders</span>
+                    <span>New Orders</span>
+                </li>
+                </Link>
+
+                <Link to = "/admin/order/history" style={{textDecoration:"none"}}>
+                <li>
+                <ShoppingCartIcon className="icon" />
+                    <span>Orders History</span>
                 </li>
                 </Link>
             

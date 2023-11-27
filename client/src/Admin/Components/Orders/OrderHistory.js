@@ -3,12 +3,12 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import Navbar from "../../Components/navbar/Navbar";
 
 
-const AdminOrder = () => {
+const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     // Fetch orders from the backend
-    fetch('/admin/orders')
+    fetch('/admin/orders/history')
       .then((response) => response.json())
       .then((data) => setOrders(data))
       .catch((error) => console.error('Error fetching orders:', error));
@@ -91,7 +91,7 @@ const AdminOrder = () => {
                   ) : (
                     <>
                       <button
-                        className="Button accept-button" style={{backgroundColor:"green", marginRight:"17px"}}
+                        className="Button accept-button"
                         onClick={() => handleAcceptOrder(order._id)}
                       >
                         Accept
@@ -114,4 +114,4 @@ const AdminOrder = () => {
   );
 };
 
-export default AdminOrder;
+export default OrderHistory;

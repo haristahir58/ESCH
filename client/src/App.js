@@ -60,6 +60,11 @@ import AddComplain from './Shopkeeper/Components/AddComplain';
 import ViewComplains from './Shopkeeper/ViewComplains';
 import ShopkeeperLogout from './Shopkeeper/Components/ShopkeeperLogout';
 import ManageComplaints from './Distributor/Components/Complains/ManageComplain';
+import AllCategories from './Admin/Components/Category/AllCategories';
+import NewCategory from './Admin/Components/Category/NewCategory';
+import OrderHistory from './Admin/Components/Orders/OrderHistory';
+import SoleOrderHistory from './Sole Distributor/Orders/SoleOrderHistory';
+import UpdateCategory from './Admin/Components/Category/UpdateCategory';
 
 
 
@@ -94,8 +99,12 @@ function App() {
             <Route exact path=":id" element={<ProductUpdate/>}/>
             <Route exact path="new" element={<NewProduct />}/>
        </Route>
+       <Route exact path="/admin/categories" element={<AllCategories/>} />
+       <Route exact path="/admin/categories/new" element={<NewCategory/>} />
        <Route exact path="/admin/categories/:id" element={<CategoryProducts/>} />
+       <Route exact path="/admin/category/:id" element={<UpdateCategory/>} />
        <Route exact path='/admin/order' element={<AdminOrder/>}></Route>
+       <Route exact path='/admin/order/history' element={<OrderHistory/>}></Route>
 
        
        
@@ -120,6 +129,7 @@ function App() {
        <Route exact path = {'/soleDistributor/cart'} element= {<Cart/>}/>
        <Route exact path = {'/soleDistributor/checkout'} element= {<Checkout/>}/>
        <Route exact path = {'/soleDistributor/orders'} element= {<SoleOrders/>}/>
+       <Route exact path = {'/soleDistributor/orders/history'} element= {<SoleOrderHistory/>}/>
        <Route exact path = {'/soleDistributor/my-products'} element= {<BuyedProducts/>}/>
        <Route exact path = {'/soleDistributor/inventory'} element= {<Inventory/>}/>
        <Route exact path = {'/soleDistributor/sell-products'} element= {<SellProducts/>}/>

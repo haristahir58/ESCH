@@ -122,6 +122,13 @@ const Sidebar = () => {
             </li>
           </Link>
 
+          <Link to="/soleDistributor/orders/history" style={{ textDecoration: 'none' }}>
+            <li>
+              <ShoppingCartIcon className="icon1" />
+              <span>Orders History</span>
+            </li>
+          </Link>
+
           <Link to="/soleDistributor/cart" style={{ textDecoration: 'none' }}>
             <li>
               <LocalShippingIcon className="icon1" />

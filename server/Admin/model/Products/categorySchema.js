@@ -5,7 +5,7 @@ const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        enum: ['Mobile Phones', 'Tablets', 'TVs', 'Computers', 'Watches']
+        // enum: ['Mobile Phones', 'Tablets', 'TVs', 'Computers', 'Watches']
     },
     products: [{
         type: mongoose.Schema.Types.ObjectId,

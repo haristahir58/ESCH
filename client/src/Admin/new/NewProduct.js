@@ -54,6 +54,13 @@ const NewProduct = () => {
 
     const PostData = async(e) =>{
       e.preventDefault();
+
+      //new check
+      if (product.title.trim() === '' || product.categoryId.trim() === '' || product.price.trim() === '' || product.quantity.trim() === '') {
+        window.alert('Please fill in all required fields.');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('title', product.title);
       formData.append('categoryId', product.categoryId); // Use product.category directly

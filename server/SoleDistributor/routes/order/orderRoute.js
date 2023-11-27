@@ -27,38 +27,74 @@ router.post('/soleDistributor/placeOrder',authenticate, async (req, res) => {
   });
 
   // Route to fetch all orders
+// Route to fetch pending orders
 router.get('/soleDistributor/orders', authenticate, async (req, res) => {
-    try {
-      const orders = await Order.find()
-        .populate('orderItems.product')
-        .populate({
-          path: 'userId',
-          select: 'email name', // Specify the fields to populate
-        });
-  
-      // Map the orders to include product titles and user email and name
-      const ordersWithProductTitles = orders.map((order) => ({
-        _id: order._id,
-        address: order.address,
-        Date: order.Date,
-        status: order.status,
-        userId: {
-          email: order.userId.email,
-          name: order.userId.name,
-        },
-        orderItems: order.orderItems.map((item) => ({
-          product: item.product.title,
-          quantity: item.quantity,
-          total: item.total,
-        })),
+  try {
+      const pendingOrders = await Order.find({ status: 'pending' })
+          .populate('orderItems.product')
+          .populate({
+              path: 'userId',
+              select: 'email name', // Specify the fields to populate
+          }).sort({ Date: -1 })
+
+      // Map the pending orders to include product titles and user email and name
+      const pendingOrdersWithProductTitles = pendingOrders.map((order) => ({
+          _id: order._id,
+          address: order.address,
+          Date: order.Date,
+          status: order.status,
+          userId: {
+              email: order.userId.email,
+              name: order.userId.name,
+          },
+          orderItems: order.orderItems.map((item) => ({
+              product: item.product.title,
+              quantity: item.quantity,
+              total: item.total,
+          })),
       }));
-  
-      res.json(ordersWithProductTitles);
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-      res.status(500).json({ message: 'Error fetching orders' });
-    }
-  });
+
+      res.json(pendingOrdersWithProductTitles);
+  } catch (error) {
+      console.error('Error fetching pending orders:', error);
+      res.status(500).json({ message: 'Error fetching pending orders' });
+  }
+});
+
+// Route to fetch accepted and rejected orders
+router.get('/soleDistributor/orders/history', authenticate, async (req, res) => {
+  try {
+      const historyOrders = await Order.find({ status: { $in: ['accepted', 'rejected'] }})
+          .populate('orderItems.product')
+          .populate({
+              path: 'userId',
+              select: 'email name', // Specify the fields to populate
+          }).sort({ Date: -1 })
+
+      // Map the history orders to include product titles and user email and name
+      const historyOrdersWithProductTitles = historyOrders.map((order) => ({
+          _id: order._id,
+          address: order.address,
+          Date: order.Date,
+          status: order.status,
+          userId: {
+              email: order.userId.email,
+              name: order.userId.name,
+          },
+          orderItems: order.orderItems.map((item) => ({
+              product: item.product.title,
+              quantity: item.quantity,
+              total: item.total,
+          })),
+      }));
+
+      res.json(historyOrdersWithProductTitles);
+  } catch (error) {
+      console.error('Error fetching order history:', error);
+      res.status(500).json({ message: 'Error fetching order history' });
+  }
+});
+
   
   
 
@@ -79,37 +115,81 @@ router.delete('/soleDistributor/orders/:id',authenticate, async (req, res) => {
 
 // Admin Routes for managing orders Accept or reject
 
+// Admin Route for managing pending orders
+// Admin Routes for managing orders Accept or reject
 router.get('/admin/orders', async (req, res) => {
-    try {
-        const orders = await Order.find().populate({
-            path: 'userId',
-            model: 'Sole Distributors',
-            select: 'name email',
-        }).populate('orderItems.product');
+  try {
+    // Fetch pending orders first and sort them by Date in descending order
+    const pendingOrders = await Order.find({ status: 'pending' })
+      .populate({
+        path: 'userId',
+        model: 'Sole Distributors',
+        select: 'name email',
+      })
+      .populate('orderItems.product')
+      .sort({ Date: -1 }); // Sort by Date in descending order
 
-        // Map the orders to include product titles and distributor's name and email
-        const ordersWithProductTitles = orders.map((order) => ({
-            _id: order._id,
-            address: order.address,
-            Date: order.Date,
-            status: order.status,
-            distributor: {
-                name: order.userId.name, // Get the name from the related distributor document
-                email: order.userId.email, // Get the email from the related distributor document
-            },
-            orderItems: order.orderItems.map((item) => ({
-                product: item.product.title,
-                quantity: item.quantity,
-                total: item.total,
-            })),
-        }));
+    const ordersWithProductTitles = pendingOrders.map((order) => ({
+      _id: order._id,
+      address: order.address,
+      Date: order.Date,
+      status: order.status,
+      distributor: {
+        name: order.userId.name,
+        email: order.userId.email,
+      },
+      orderItems: order.orderItems.map((item) => ({
+        product: item.product.title,
+        quantity: item.quantity,
+        total: item.total,
+      })),
+    }));
 
-        res.json(ordersWithProductTitles);
-    } catch (error) {
-        console.error('Error fetching orders:', error);
-        res.status(500).json({ message: 'Error fetching orders' });
-    }
+    res.json(ordersWithProductTitles);
+  } catch (error) {
+    console.error('Error fetching pending orders:', error);
+    res.status(500).json({ message: 'Error fetching pending orders' });
+  }
 });
+
+
+
+// Admin Route for viewing order history (accepted or rejected orders)
+router.get('/admin/orders/history', async (req, res) => {
+  try {
+      const historyOrders = await Order.find({ status: { $in: ['accepted', 'rejected'] }})
+          .populate({
+              path: 'userId',
+              model: 'Sole Distributors',
+              select: 'name email',
+          })
+          .populate('orderItems.product').sort({ Date: -1 })
+
+      const ordersWithProductTitles = historyOrders.map((order) => ({
+          _id: order._id,
+          address: order.address,
+          Date: order.Date,
+          status: order.status,
+          distributor: {
+              name: order.userId.name,
+              email: order.userId.email,
+          },
+          orderItems: order.orderItems.map((item) => ({
+              product: item.product.title,
+              quantity: item.quantity,
+              total: item.total,
+          })),
+      }));
+
+      res.json(ordersWithProductTitles);
+  } catch (error) {
+      console.error('Error fetching order history:', error);
+      res.status(500).json({ message: 'Error fetching order history' });
+  }
+});
+
+
+
 
 // Accept or reject
 router.put('/admin/orders/:id', async (req, res) => {

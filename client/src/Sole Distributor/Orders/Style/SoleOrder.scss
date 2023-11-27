@@ -1,58 +1,39 @@
-/* Add these styles in your SCSS file */
 
+/* Style for the order list */
 .order-list {
   display: flex;
-  // flex-direction: column;
   flex-wrap: wrap;
 }
 
+/* Style for each order item */
 .order-item {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   margin: 10px;
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  background-color: #f8f8f8;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  align-items: center;
+  padding: 20px;
+  background-color: #fbfbfb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(29.33% - 20px);
 }
 
+/* Style for the order information section */
 .order-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.order-id,
-.order-email,
-.order-address {
-  font-weight: bold;
-  margin: 5px 0;
-}
-
-.order-items {
-  margin-top: 10px;
-}
-
-.order-item-details {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 10px;
-  padding: 5px;
 }
 
-.product-title {
+/* Style for labels within the order information section */
+.order-info label {
   font-weight: bold;
 }
 
+/* Style for order status */
 .status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
   font-weight: bold;
 }
 
+/* Style for different order statuses */
 .status.accepted {
   background-color: lightgreen;
   color: white;
@@ -68,23 +49,53 @@
   color: white;
 }
 
-.order-action {
-  margin-top: 10px;
-  text-align: center;
+/* Style for the order items section */
+.order-items {
+  margin-bottom: 10px;
 }
 
+/* Style for each order item details */
+.order-item-details {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+/* Style for product title */
+.product-title {
+  font-weight: bold;
+}
+
+/* Style for total price and quantity */
+.total-price,
+.quantity {
+  margin-top: 5px;
+}
+
+/* Style for the order date */
+.order-date {
+  font-weight: bold;
+}
+
+/* Style for the order action section */
+.order-action {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Style for the cancel order button */
 .Button {
-  background-color: #007BFF;
+  background-color: #ff6961;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: bold;
-  margin: 5px;
+}
 
-  &:hover {
-    background-color: #0056b3;
-  }
+/* Hover effect for the cancel order button */
+.Button:hover {
+  background-color: #ff0000;
 }

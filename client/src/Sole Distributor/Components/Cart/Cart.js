@@ -55,7 +55,7 @@ const Cart = () => {
                     class="fas fa-minus minus"
                     onClick={() => decrement(item)}
                   ></i>
-                  <input type="text" placeholder={item.quantity} />
+                  <input type="text" placeholder={item.quantity} readOnly  />
                   <i class="fas fa-plus add" onClick={() => increment(item)}></i>
                 </div>
 

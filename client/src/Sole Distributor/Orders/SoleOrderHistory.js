@@ -3,31 +3,18 @@ import Sidebar from "../Components/Sidebar/SoleSidebar";
 import Navbar from "../Components/navbar/Navbar";
 import './Style/SoleOrder.scss'
 
-const SoleOrders = () => {
+const SoleOrderHistory = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     // Fetch orders from the backend
-    fetch('/soleDistributor/orders')
+    fetch('/soleDistributor/orders/history')
       .then((response) => response.json())
       .then((data) => setOrders(data))
       .catch((error) => console.error('Error fetching orders:', error));
   }, []);
 
-  const handleCancelOrder = (orderId) => {
-    // Send a DELETE request to cancel the order
-    fetch(`/soleDistributor/orders/${orderId}`, {
-      method: 'DELETE',
-      credentials: 'include'
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          // Remove the canceled order from the local state
-          setOrders(orders.filter((order) => order._id !== orderId));
-        }
-      })
-      .catch((error) => console.error('Error canceling order:', error));
-  };
+
 
   return (
     <>
@@ -61,14 +48,6 @@ const SoleOrders = () => {
               <span className={`status ${order.status}`}>{order.status}</span>
                 </div>
 
-                <div className="order-action">
-                    <button
-                      className="Button"
-                      onClick={() => handleCancelOrder(order._id)}
-                    >
-                      Cancel Order
-                    </button>
-                  </div>
               </div>
             ))}
           </div>
@@ -78,4 +57,4 @@ const SoleOrders = () => {
   );
 };
 
-export default SoleOrders;
+export default SoleOrderHistory;

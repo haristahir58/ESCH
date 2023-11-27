@@ -25,9 +25,6 @@ const SoleLogout = () => {
         })
     })
 
-  return (
-    <div>Logout</div>
-  )
 }
 
 export default SoleLogout
