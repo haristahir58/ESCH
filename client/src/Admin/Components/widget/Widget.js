@@ -12,7 +12,7 @@ const Widget = ({ type }) => {
   const [orderCount, setOrderCount] = useState();
   const [soleCount, setSoleCount] = useState();
   const [soleAuthCount, setSoleAuthCount] = useState();
-  const [earnings, setEarnings] = useState();
+  const [sales, setSales] = useState();
   const diff = 20;
 
   useEffect(() => {
@@ -38,11 +38,11 @@ const Widget = ({ type }) => {
       const orderData = await orderResponse.json();
       setOrderCount(orderData.length);
 
-      // Fetch earnings
-      const earningsResponse = await fetch('/admin/earnings');
-      console.log('Earnings response:', earningsResponse);
-      const earningsData = await earningsResponse.json();
-      setEarnings(earningsData.totalEarnings);
+      // Fetch sales
+      const salesResponse = await fetch('/admin/sales');
+      console.log('Sales response:', salesResponse);
+      const salesData = await salesResponse.json();
+      setSales(salesData.acceptedOrdersCount);
     } catch (error) {
       console.error("Error fetching counts:", error);
     }
@@ -70,7 +70,7 @@ const Widget = ({ type }) => {
       break;
     case "order":
       data = {
-        title: "ORDERS",
+        title: "NEW ORDERS",
         isMoney: false,
         count: orderCount, // Display order count
         link: <Link to={'/admin/order'}>"View all orders"</Link>, // Link to the orders page
@@ -85,12 +85,12 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earnings":
+    case "sales":
       data = {
-        title: "EARNINGS",
+        title: "SALES",
         isMoney: true,
-        count: earnings,
-        link: "View net earnings",
+        count: sales,
+        link: "View sales",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"

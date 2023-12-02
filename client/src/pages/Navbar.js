@@ -87,9 +87,6 @@ export default function Navbar() {
         <NavLink to={"/distributor/signin"} className="dropdown-item">
           As Distributor
         </NavLink>
-        <a href="single.html" className="dropdown-item">
-          As Sales team Member
-        </a>
         <NavLink to={"/shopkeeper/login"} className="dropdown-item">
           As Shopkeeper
         </NavLink>
@@ -118,9 +115,6 @@ export default function Navbar() {
         <NavLink to= {"/distributor/register"} className="dropdown-item">
           As Distributor
         </NavLink>
-        <a href="single.html" className="dropdown-item">
-          As Sales team Member
-        </a>
         <NavLink to={"/shopkeeper/register"} className="dropdown-item">
           As Shopkeeper
         </NavLink>

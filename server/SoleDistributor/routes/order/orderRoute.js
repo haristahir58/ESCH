@@ -378,7 +378,22 @@ router.get('/soleDistributor/low-stock', authenticate, async (req, res) => {
 });
 
 
+//Sales
 
+router.get('/admin/sales', async (req, res) => {
+  try {
+    // Count the number of accepted orders
+    const acceptedOrdersCount = await Order.countDocuments({
+      status: 'accepted'
+    });
+
+    // Send the count as a response
+    res.json({ acceptedOrdersCount });
+  } catch (error) {
+    console.error('Error counting accepted orders:', error);
+    res.status(500).json({ message: 'Error counting accepted orders' });
+  }
+});
 
 
 // Earnings
@@ -555,6 +570,93 @@ router.get('/admin/lastMonthEarnings', async (req, res) => {
     res.status(500).json({ message: 'Error fetching last month earnings' });
   }
 });
+
+
+
+const linearRegression = (x, y) => {
+  const n = x.length;
+
+  // Calculate the means of x and y
+  const xMean = x.reduce((acc, val) => acc + val, 0) / n;
+  const yMean = y.reduce((acc, val) => acc + val, 0) / n;
+
+  // Calculate the slope (b1) and y-intercept (b0) using the least squares method
+  let numerator = 0;
+  let denominator = 0;
+
+  for (let i = 0; i < n; i++) {
+    numerator += (x[i] - xMean) * (y[i] - yMean);
+    denominator += (x[i] - xMean) ** 2;
+  }
+
+  const b1 = numerator / denominator;
+  const b0 = yMean - b1 * xMean;
+
+  return { b0, b1 };
+};
+
+router.get('/admin/predictNextMonthEarnings', async (req, res) => {
+  try {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Fetch earnings data for the previous 11 months
+    const prev11MonthsData = await Order.aggregate([
+      {
+        $match: {
+          status: 'accepted',
+          'Date': {
+            $lt: currentDate, // Use the current date
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: '%Y-%m', date: '$Date' },
+          },
+          Total: { $sum: { $sum: '$orderItems.total' } },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          month: '$_id',
+          Total: 1,
+        },
+      },
+    ]);
+
+    // Separate months and earnings into arrays
+    const months = prev11MonthsData.map((data) => parseInt(data.month.split('-')[1])); // Extract month part and convert to integer
+    const earnings = prev11MonthsData.map((data) => data.Total);
+
+    // Use linear regression to predict the next month
+    const { b0, b1 } = linearRegression(months, earnings);
+
+    // Predict the earnings for the next month
+    const nextMonthIndex = months.length + 1;
+    const predictedNextMonth = Math.round(b0 + b1 * nextMonthIndex);
+
+    // Format the response
+    const response = [{ month: '2024-01', Total: predictedNextMonth }];
+
+    // Send the predicted earnings for the next month
+    res.json(response);
+  } catch (error) {
+    console.error('Error predicting next month earnings:', error);
+    res.status(500).json({ message: 'Error predicting next month earnings' });
+  }
+});
+
+
+
+
+
+module.exports = router;
+
+
+
 
 
 

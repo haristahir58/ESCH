@@ -133,11 +133,16 @@ router.get('/soleDistributor/profile', authenticate,(req,res)=>{
   });
   
   
+  // router.get('/soleDistributor/logout', (req, res) => {
+  //   res.clearCookie('jwtoken',{path:'/'});
+  //   res.json({ message: 'Logout successful' });
+  //   res.status(200).send("User Logout")
+  // }); 
   router.get('/soleDistributor/logout', (req, res) => {
-    res.clearCookie('jwtoken',{path:'/'});
-    res.json({ message: 'Logout successful' });
-    res.status(200).send("User Logout")
-  }); 
+    res.clearCookie('jwtoken', { path: '/' });
+    res.status(200).json({ message: 'Logout successful' });
+  });
+  
 
 
 module.exports = router;

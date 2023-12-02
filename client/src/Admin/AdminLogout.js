@@ -16,14 +16,14 @@ const AdminLogout = () => {
             credentials:'include'
         }).then((res)=>{
             navigate('/admin/login',{replace:true})
-            if(!res.status === 200){
-                const error = new Error(res.error)
-                throw error
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
-    })
+            if (res.status !== 200) {
+                const error = new Error(res.error);
+                throw error;
+              }
+            }).catch((err) => {
+              console.log(err);
+            });
+          }, []);
 
 }
 
